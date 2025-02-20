@@ -1,3 +1,4 @@
-service:
-  type: ClusterIP
+gateway:
+  service:
+    type: ClusterIP
 accessLog: true
