@@ -1,2 +1,5 @@
 service:
   type: ClusterIP
+image:
+  repository: 674851156463.dkr.ecr.eu-north-1.amazonaws.com/deniedboarding/egress
+  tag: 0.0.1

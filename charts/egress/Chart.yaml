@@ -2,10 +2,13 @@ apiVersion: v1
 description: istio egress gateway config chart
 icon: https://istio.io/latest/favicons/android-192x192.png
 maintainers:
-- name: core
+  - name: core
 name: egress
-version: "1"
+version: "0.0.1"
 dependencies:
-- name: gateway
-  version: 1.24.3
-  repository: https://istio-release.storage.googleapis.com/charts
+  - name: gateway
+    version: 1.24.3
+    repository: https://istio-release.storage.googleapis.com/charts
+appVersion: 0.0.1
+sources:
+  - https://github.com/deniedboarding/egress.git
