@@ -1,0 +1,35 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: direct-{{ include "name" . }}-through-egress-gateway
+spec:
+  hosts:
+  - {{ .Values.host }}
+  gateways:
+  - mesh
+  - {{ .Values.gateway.name }}
+  tls:
+  - match:
+    - gateways:
+      - mesh
+      port: 443
+      sniHosts:
+      - {{ .Values.host }}
+    route:
+    - destination:
+        host: {{ .Values.gateway.name }}.istio-system.svc.cluster.local
+        subset: {{ include "name" . }}
+        port:
+          number: 443
+  - match:
+    - gateways:
+      - {{ .Values.gateway.name }}
+      port: 443
+      sniHosts:
+      - {{ .Values.host }}
+    route:
+    - destination:
+        host: {{ .Values.host }}
+        port:
+          number: 443
+      weight: 100

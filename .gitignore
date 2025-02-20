@@ -1,0 +1,7 @@
+# OS generated files
+**/.DS_Store
+
+# Tool-specific files
+*.code-workspace
+.idea
+.vscode

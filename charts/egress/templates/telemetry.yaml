@@ -1,0 +1,13 @@
+{{ if .Values.accessLog -}}
+apiVersion: telemetry.istio.io/v1
+kind: Telemetry
+metadata:
+  name: {{ include "name" . }}
+spec:
+  accessLogging:
+  - providers:
+    - name: envoy
+  selector:
+    matchLabels:
+      app: {{ .Values.gateway.name }}
+{{ end -}}

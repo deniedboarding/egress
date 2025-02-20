@@ -1,0 +1,9 @@
+apiVersion: networking.istio.io/v1
+kind: DestinationRule
+metadata:
+  name: egressgateway-for-{{ include "name" . }}
+spec:
+  host: {{ .Values.gateway.name }}.istio-system.svc.cluster.local
+  subsets:
+  - name: {{ include "name" . }}
+  
