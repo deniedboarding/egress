@@ -1,4 +1,4 @@
-apiVersion: v1
+apiVersion: v2
 description: istio egress gateway config chart
 icon: https://istio.io/latest/favicons/android-192x192.png
 maintainers:
