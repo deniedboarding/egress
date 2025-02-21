@@ -4,3 +4,4 @@ gateway:
   podDisruptionBudget:
     minAvailable: 1
 accessLog: true
+port: 443

@@ -7,7 +7,7 @@ spec:
     istio: {{ .Values.gateway.name }}
   servers:
   - port:
-      number: 443
+      number: {{ .Values.port }}
       name: tls
       protocol: TLS
     hosts:

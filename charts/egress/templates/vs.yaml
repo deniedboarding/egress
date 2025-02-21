@@ -12,7 +12,7 @@ spec:
   - match:
     - gateways:
       - mesh
-      port: 443
+      port: {{ .Values.port }}
       sniHosts:
       - {{ .Values.host }}
     route:
@@ -20,16 +20,16 @@ spec:
         host: {{ .Values.gateway.name }}.istio-system.svc.cluster.local
         subset: {{ include "name" . }}
         port:
-          number: 443
+          number: {{ .Values.port }}
   - match:
     - gateways:
       - {{ .Values.gateway.name }}
-      port: 443
+      port: {{ .Values.port }}
       sniHosts:
       - {{ .Values.host }}
     route:
     - destination:
         host: {{ .Values.host }}
         port:
-          number: 443
+          number: {{ .Values.port }}
       weight: 100

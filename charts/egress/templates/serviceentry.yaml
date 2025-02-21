@@ -6,8 +6,8 @@ spec:
   hosts:
   - {{ .Values.host }}
   ports:
-  - number: 443
-    name: https
-    protocol: HTTPS
+  - number: {{ .Values.port }}
+    name: tls
+    protocol: TLS
   resolution: DNS
   location: MESH_EXTERNAL
