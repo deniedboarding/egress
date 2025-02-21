@@ -1,4 +1,6 @@
 gateway:
   service:
     type: ClusterIP
+  podDisruptionBudget:
+    minAvailable: 1
 accessLog: true
