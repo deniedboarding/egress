@@ -6,8 +6,9 @@ spec:
   host: {{ .Values.gateway.name }}.istio-system.svc.cluster.local
   subsets:
   - name: {{ include "name" . }}
-  outlierDetection:
-    baseEjectionTime: 30s
-    consecutive5xxErrors: 5
-    interval: 10s
-    maxEjectionPercent: 50
+  trafficPolicy:
+    outlierDetection:
+      baseEjectionTime: 30s
+      consecutive5xxErrors: 5
+      interval: 10s
+      maxEjectionPercent: 50
