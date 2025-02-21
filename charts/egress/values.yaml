@@ -4,3 +4,6 @@ gateway:
   podDisruptionBudget:
     minAvailable: 1
 accessLog: true
+image:
+  repository: 674851156463.dkr.ecr.eu-north-1.amazonaws.com/deniedboarding/egress
+  tag: 1.0.2
