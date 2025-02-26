@@ -6,3 +6,6 @@ gateway:
 hosts: []
 accessLog: true
 port: 443
+image:
+  repository: 674851156463.dkr.ecr.eu-north-1.amazonaws.com/deniedboarding/egress
+  tag: 2.0.1
