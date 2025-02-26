@@ -10,6 +10,8 @@ spec:
       number: {{ .Values.port }}
       name: tls
       protocol: TLS
-    hosts: {{ toYaml .Values.hosts | nindent 4}}
+{{ with .Values.hosts }}
+    hosts: {{ toYaml . | nindent 4 }}
+{{ end }}
     tls:
       mode: PASSTHROUGH

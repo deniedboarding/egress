@@ -3,7 +3,9 @@ kind: ServiceEntry
 metadata:
   name: {{ include "name" . }}
 spec:
-  hosts:  {{ toYaml .Values.hosts | nindent 2 }}
+{{ with .Values.hosts }}
+  hosts: {{ toYaml . | nindent 2 }}
+{{ end }}
   ports:
   - number: {{ .Values.port }}
     name: tls
