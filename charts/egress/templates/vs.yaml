@@ -3,8 +3,7 @@ kind: VirtualService
 metadata:
   name: direct-{{ include "name" . }}-through-egress-gateway
 spec:
-  hosts:
-  - {{ .Values.host }}
+  hosts: {{ toYaml .Values.hosts | nindent 2 }}
   gateways:
   - mesh
   - {{ .Values.gateway.name }}
@@ -13,8 +12,7 @@ spec:
     - gateways:
       - mesh
       port: {{ .Values.port }}
-      sniHosts:
-      - {{ .Values.host }}
+      sniHosts: {{ toYaml .Values.hosts | nindent 6 }}
     route:
     - destination:
         host: {{ .Values.gateway.name }}.istio-system.svc.cluster.local
@@ -22,14 +20,16 @@ spec:
         port:
           number: {{ .Values.port }}
   - match:
+{{ range .Values.hosts }}
     - gateways:
-      - {{ .Values.gateway.name }}
+      - {{ $.Values.gateway.name }}
       port: {{ .Values.port }}
       sniHosts:
-      - {{ .Values.host }}
+      - {{ . }}
     route:
     - destination:
-        host: {{ .Values.host }}
+        host: {{ . }}
         port:
           number: {{ .Values.port }}
       weight: 100
+{{ end }}
