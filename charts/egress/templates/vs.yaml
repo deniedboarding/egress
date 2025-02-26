@@ -23,7 +23,7 @@ spec:
 {{ range .Values.hosts }}
     - gateways:
       - {{ $.Values.gateway.name }}
-      port: {{ .Values.port }}
+      port: {{ $.Values.port }}
       sniHosts:
       - {{ . }}
     route:

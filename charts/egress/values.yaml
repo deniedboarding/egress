@@ -3,5 +3,6 @@ gateway:
     type: ClusterIP
   podDisruptionBudget:
     minAvailable: 1
+hosts: []
 accessLog: true
 port: 443
