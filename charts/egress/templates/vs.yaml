@@ -23,8 +23,8 @@ spec:
         subset: {{ include "name" . }}
         port:
           number: {{ .Values.port }}
-  - match:
 {{ range .Values.hosts }}
+  - match:
     - gateways:
       - {{ $.Values.gateway.name }}
       port: {{ $.Values.port }}
