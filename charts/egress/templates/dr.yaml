@@ -1,4 +1,4 @@
-{{ if ne .Values.profile "ambient" }}
+{{ if .Values.gateway.sidecar }}
 apiVersion: networking.istio.io/v1
 kind: DestinationRule
 metadata:

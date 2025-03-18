@@ -2,7 +2,7 @@ apiVersion: networking.istio.io/v1
 kind: ServiceEntry
 metadata:
   name: {{ include "name" . }}
-{{ if ne .Values.profile "sidecar" }}
+{{ if .Values.gateway.ambient }}
   labels:
     istio.io/use-waypoint: {{ .Values.gateway.name }}
 {{ end }}

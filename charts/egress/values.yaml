@@ -1,5 +1,6 @@
-profile: sidecar
 gateway:
+  sidecar: true
+  ambient: false
   service:
     type: ClusterIP
   podDisruptionBudget:
