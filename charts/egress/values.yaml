@@ -1,3 +1,4 @@
+profile: sidecar
 gateway:
   service:
     type: ClusterIP

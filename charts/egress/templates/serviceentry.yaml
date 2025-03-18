@@ -2,6 +2,10 @@ apiVersion: networking.istio.io/v1
 kind: ServiceEntry
 metadata:
   name: {{ include "name" . }}
+{{ if ne .Values.profile "sidecar" }}
+  labels:
+    istio.io/use-waypoint: {{ .Values.gateway.name }}
+{{ end }}
 spec:
 {{ with .Values.hosts }}
   hosts: {{ toYaml . | nindent 2 }}

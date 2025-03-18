@@ -1,3 +1,4 @@
+{{ if ne .Values.profile "ambient" }}
 apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
@@ -36,4 +37,5 @@ spec:
         port:
           number: {{ $.Values.port }}
       weight: 100
+{{ end }}
 {{ end }}
