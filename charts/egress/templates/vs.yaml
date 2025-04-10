@@ -30,10 +30,10 @@ spec:
       - {{ $.Values.gateway.name }}
       port: {{ $.Values.port }}
       sniHosts:
-      - {{ . }}
+      - {{ . | quote }}
     route:
     - destination:
-        host: {{ . }}
+        host: {{ . | quote }}
         port:
           number: {{ $.Values.port }}
       weight: 100
