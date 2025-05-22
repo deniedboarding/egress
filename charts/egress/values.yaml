@@ -11,3 +11,6 @@ accessLog: true
 port: 443
 serviceEntryPerHost: false
 resolution: DNS
+image:
+  repository: 674851156463.dkr.ecr.eu-north-1.amazonaws.com/deniedboarding/egress
+  tag: 2.4.0
