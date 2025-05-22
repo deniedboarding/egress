@@ -11,3 +11,6 @@ resolution: DNS
 protocol: tls
 sidecar: true
 ambient: false
+image:
+  repository: 674851156463.dkr.ecr.eu-north-1.amazonaws.com/deniedboarding/egress
+  tag: 3.0.0
