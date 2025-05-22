@@ -17,6 +17,7 @@ spec:
     protocol: {{ $.Values.gateway.protocol | upper }}
   resolution: DNS
   location: MESH_EXTERNAL
+---
 {{ end }}
 {{ else }}
 apiVersion: networking.istio.io/v1
