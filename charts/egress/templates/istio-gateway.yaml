@@ -1,4 +1,4 @@
-{{ if .Values.gateway.sidecar }}
+{{ if .Values.sidecar }}
 apiVersion: networking.istio.io/v1
 kind: Gateway
 metadata:
@@ -9,12 +9,12 @@ spec:
   servers:
   - port:
       number: {{ .Values.port }}
-      name: {{ .Values.gateway.protocol }}
-      protocol: {{ .Values.gateway.protocol | upper }}
+      name: {{ .Values.protocol }}
+      protocol: {{ .Values.protocol | upper }}
 {{ with .Values.hosts }}
     hosts: {{ toYaml . | nindent 4 }}
 {{ end }}
-{{ if eq .Values.gateway.protocol "tls" }}
+{{ if eq .Values.protocol "tls" }}
     tls:
       mode: PASSTHROUGH
 {{ end }}

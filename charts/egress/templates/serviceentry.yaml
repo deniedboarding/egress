@@ -4,7 +4,7 @@ apiVersion: networking.istio.io/v1
 kind: ServiceEntry
 metadata:
   name: {{ trimPrefix "*." . }}
-{{ if $.Values.gateway.ambient }}
+{{ if $.Values.ambient }}
   labels:
     istio.io/use-waypoint: {{ $.Values.gateway.name }}
 {{ end }}
@@ -13,8 +13,8 @@ spec:
   - {{ . | quote }}
   ports:
   - number: {{ $.Values.port }}
-    name: {{ $.Values.gateway.protocol }}
-    protocol: {{ $.Values.gateway.protocol | upper }}
+    name: {{ $.Values.protocol }}
+    protocol: {{ $.Values.protocol | upper }}
   resolution: {{ $.Values.resolution }}
   location: MESH_EXTERNAL
 ---
@@ -24,7 +24,7 @@ apiVersion: networking.istio.io/v1
 kind: ServiceEntry
 metadata:
   name: {{ include "name" . }}
-{{ if .Values.gateway.ambient }}
+{{ if .Values.ambient }}
   labels:
     istio.io/use-waypoint: {{ .Values.gateway.name }}
 {{ end }}
@@ -34,8 +34,8 @@ spec:
 {{ end }}
   ports:
   - number: {{ .Values.port }}
-    name: {{ .Values.gateway.protocol }}
-    protocol: {{ .Values.gateway.protocol | upper }}
+    name: {{ .Values.protocol }}
+    protocol: {{ .Values.protocol | upper }}
   resolution: {{ .Values.resolution }}
   location: MESH_EXTERNAL
 {{ end }}

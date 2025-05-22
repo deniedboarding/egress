@@ -1,4 +1,4 @@
-{{ if .Values.gateway.sidecar }}
+{{ if .Values.sidecar }}
 apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
@@ -10,12 +10,12 @@ spec:
   gateways:
   - mesh
   - {{ .Values.gateway.name }}
-  {{ .Values.gateway.protocol }}:
+  {{ .Values.protocol }}:
   - match:
     - gateways:
       - mesh
       port: {{ .Values.port }}
-{{ if eq .Values.gateway.protocol "tls" }}
+{{ if eq .Values.protocol "tls" }}
 {{ with .Values.hosts }}
       sniHosts: {{ toYaml . | nindent 6 }}
 {{ end }}
@@ -31,7 +31,7 @@ spec:
     - gateways:
       - {{ $.Values.gateway.name }}
       port: {{ $.Values.port }}
-{{ if eq $.Values.gateway.protocol "tls" }}
+{{ if eq $.Values.protocol "tls" }}
       sniHosts:
       - {{ . | quote }}
 {{ end }}

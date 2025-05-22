@@ -1,8 +1,5 @@
 gateway:
   # Valid protocols are currently http, tcp and tls
-  protocol: tls
-  sidecar: true
-  ambient: false
   service:
     type: ClusterIP
   podDisruptionBudget:
@@ -11,3 +8,6 @@ accessLog: true
 port: 443
 serviceEntryPerHost: false
 resolution: DNS
+protocol: tls
+sidecar: true
+ambient: false

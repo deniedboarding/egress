@@ -1,4 +1,4 @@
-{{ if .Values.gateway.ambient }}
+{{ if .Values.ambient }}
 apiVersion: gateway.networking.k8s.io/v1
 kind: Gateway
 metadata:
