@@ -12,7 +12,7 @@ spec:
 {{ end }}
   ports:
   - number: {{ .Values.port }}
-    name: tls
-    protocol: TLS
+    name: {{ .Values.gateway.protocol }}
+    protocol: {{ .Values.gateway.protocol | upper }}
   resolution: DNS
   location: MESH_EXTERNAL

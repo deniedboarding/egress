@@ -10,13 +10,15 @@ spec:
   gateways:
   - mesh
   - {{ .Values.gateway.name }}
-  tls:
+  {{ .Values.gateway.protocol }}:
   - match:
     - gateways:
       - mesh
       port: {{ .Values.port }}
+{{ if eq .Values.gateway.protocol "tls" }}
 {{ with .Values.hosts }}
       sniHosts: {{ toYaml . | nindent 6 }}
+{{ end }}
 {{ end }}
     route:
     - destination:
@@ -29,8 +31,10 @@ spec:
     - gateways:
       - {{ $.Values.gateway.name }}
       port: {{ $.Values.port }}
+{{ if eq $.Values.gateway.protocol "tls" }}
       sniHosts:
       - {{ . | quote }}
+{{ end }}
     route:
     - destination:
         host: {{ . | quote }}

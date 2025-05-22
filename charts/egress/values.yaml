@@ -1,4 +1,6 @@
 gateway:
+  # Valid protocols are currently http and tls
+  protocol: tls
   sidecar: true
   ambient: false
   service:
