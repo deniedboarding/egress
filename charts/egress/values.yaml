@@ -1,5 +1,5 @@
 gateway:
-  # Valid protocols are currently http and tls
+  # Valid protocols are currently http, tcp and tls
   protocol: tls
   sidecar: true
   ambient: false
@@ -10,3 +10,4 @@ gateway:
 accessLog: true
 port: 443
 serviceEntryPerHost: false
+resolution: DNS

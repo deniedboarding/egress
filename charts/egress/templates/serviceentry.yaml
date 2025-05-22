@@ -15,7 +15,7 @@ spec:
   - number: {{ $.Values.port }}
     name: {{ $.Values.gateway.protocol }}
     protocol: {{ $.Values.gateway.protocol | upper }}
-  resolution: DNS
+  resolution: {{ $.Values.resolution }}
   location: MESH_EXTERNAL
 ---
 {{ end }}
@@ -36,6 +36,6 @@ spec:
   - number: {{ .Values.port }}
     name: {{ .Values.gateway.protocol }}
     protocol: {{ .Values.gateway.protocol | upper }}
-  resolution: DNS
+  resolution: {{ .Values.resolution }}
   location: MESH_EXTERNAL
 {{ end }}
