@@ -1,3 +1,24 @@
+{{ if .Values.serviceEntryPerHost }}
+{{ range .Values.hosts }}
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry
+metadata:
+  name: {{ trimPrefix "*." . }}
+{{ if $.Values.gateway.ambient }}
+  labels:
+    istio.io/use-waypoint: {{ $.Values.gateway.name }}
+{{ end }}
+spec:
+  hosts:
+  - {{ . | quote }}
+  ports:
+  - number: {{ $.Values.port }}
+    name: {{ $.Values.gateway.protocol }}
+    protocol: {{ $.Values.gateway.protocol | upper }}
+  resolution: DNS
+  location: MESH_EXTERNAL
+{{ end }}
+{{ else }}
 apiVersion: networking.istio.io/v1
 kind: ServiceEntry
 metadata:
@@ -16,3 +37,4 @@ spec:
     protocol: {{ .Values.gateway.protocol | upper }}
   resolution: DNS
   location: MESH_EXTERNAL
+{{ end }}
