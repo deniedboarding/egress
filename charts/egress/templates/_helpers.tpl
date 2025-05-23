@@ -20,3 +20,25 @@ app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 helm.sh/chart: {{ printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 {{- end -}}
+
+{{- define "egress.service-entry" }}
+apiVersion: networking.istio.io/v1
+kind: ServiceEntry
+metadata:
+  name: {{ .name }}
+  labels:
+{{ if .Values.ambient }}
+    istio.io/use-waypoint: {{ .Values.gateway.name }}
+{{ end }}
+    {{- include "egress.labels" . | nindent 4}}
+spec:
+{{ with .hosts }}
+  hosts: {{ toYaml . | nindent 2 }}
+{{ end }}
+  ports:
+  - number: {{ .Values.port }}
+    name: {{ .Values.protocol }}
+    protocol: {{ .Values.protocol | upper }}
+  resolution: {{ .Values.resolution }}
+  location: MESH_EXTERNAL
+{{- end -}}

@@ -1,43 +1,13 @@
+{{- $seScope := deepCopy . -}}
 {{ if .Values.serviceEntryPerHost }}
 {{ range .Values.hosts }}
-apiVersion: networking.istio.io/v1
-kind: ServiceEntry
-metadata:
-  name: {{ trimPrefix "*." . }}
-  labels:
-{{ if $.Values.ambient }}
-    istio.io/use-waypoint: {{ $.Values.gateway.name }}
-{{ end }}
-    {{- include "egress.labels" $ | nindent 4}}
-spec:
-  hosts:
-  - {{ . | quote }}
-  ports:
-  - number: {{ $.Values.port }}
-    name: {{ $.Values.protocol }}
-    protocol: {{ $.Values.protocol | upper }}
-  resolution: {{ $.Values.resolution }}
-  location: MESH_EXTERNAL
+{{- $_ := set $seScope "hosts" (list .) -}}
+{{- $_ = set $seScope "name" (trimPrefix "*." .) -}}
+{{- include "egress.service-entry" $seScope }}
 ---
 {{ end }}
 {{ else }}
-apiVersion: networking.istio.io/v1
-kind: ServiceEntry
-metadata:
-  name: {{ include "name" . }}
-  labels:
-{{ if .Values.ambient }}
-    istio.io/use-waypoint: {{ .Values.gateway.name }}
-{{ end }}
-    {{- include "egress.labels" . | nindent 4}}
-spec:
-{{ with .Values.hosts }}
-  hosts: {{ toYaml . | nindent 2 }}
-{{ end }}
-  ports:
-  - number: {{ .Values.port }}
-    name: {{ .Values.protocol }}
-    protocol: {{ .Values.protocol | upper }}
-  resolution: {{ .Values.resolution }}
-  location: MESH_EXTERNAL
+{{- $_ := set $seScope "hosts" .Values.hosts -}}
+{{- $_ = set $seScope "name" (include "name" $seScope) -}}
+{{- include "egress.service-entry" $seScope }}
 {{ end }}
