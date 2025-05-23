@@ -8,6 +8,6 @@
 {{ end }}
 {{ else }}
 {{- $_ := set $seScope "hosts" .Values.hosts -}}
-{{- $_ = set $seScope "name" (include "name" $seScope) -}}
+{{- $_ = set $seScope "name" (include "name" .) -}}
 {{- include "egress.service-entry" $seScope }}
 {{ end }}
