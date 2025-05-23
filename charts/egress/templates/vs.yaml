@@ -40,8 +40,35 @@ spec:
     route:
     - destination:
         host: {{ . | quote }}
+        subset: {{ include "name" . }}
         port:
           number: {{ $.Values.port }}
       weight: 100
+{{ end }}
+{{ if and .Values.tlsOrigination (eq .Values.protocol "tls") }}
+  http:
+  - match:
+    - gateways:
+      - mesh
+      port: 80
+    route:
+    - destination:
+        host: {{ .Values.gateway.name }}.istio-system.svc.cluster.local
+        subset: tls-origination
+        port:
+          number: {{ .Values.port }}
+{{ range .Values.hosts }}
+  - match:
+    - gateways:
+      - {{ $.Values.gateway.name }}
+      port: 80
+    route:
+    - destination:
+        host: {{ . | quote }}
+        subset: tls-origination
+        port:
+          number: {{ $.Values.port }}
+      weight: 100
+{{ end }}
 {{ end }}
 {{ end }}

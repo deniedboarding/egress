@@ -12,5 +12,5 @@ protocol: tls
 sidecar: true
 ambient: false
 # https://istio.io/latest/docs/tasks/traffic-management/egress/egress-gateway-tls-origination/
-# tls-origination only works with protocol http
-tls-origination: false
+# Enable TLS origination if protocol is tls
+tlsOrigination: true

@@ -9,6 +9,9 @@ spec:
   host: {{ .Values.gateway.name }}.istio-system.svc.cluster.local
   subsets:
   - name: {{ include "name" . }}
+{{ if and .Values.tlsOrigination (eq .Values.protocol "tls") }}
+  - name: tls-origination
+{{ end }}
   trafficPolicy:
     outlierDetection:
       baseEjectionTime: 30s

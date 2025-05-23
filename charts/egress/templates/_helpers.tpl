@@ -39,6 +39,11 @@ spec:
   - number: {{ .Values.port }}
     name: {{ .Values.protocol }}
     protocol: {{ .Values.protocol | upper }}
+{{ if and .Values.tlsOrigination (eq .Values.protocol "tls") }}
+  - name: http-port-for-tls-origination
+    number: 80
+    protocol: HTTP
+{{ end }}
   resolution: {{ .Values.resolution }}
   location: MESH_EXTERNAL
 {{- end -}}

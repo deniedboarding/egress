@@ -1,0 +1,30 @@
+{{ if and .Values.tlsOrigination (eq .Values.protocol "tls") }}
+{{ range .Values.hosts }}
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ . }}
+spec:
+  host: {{ . }}
+  subsets:
+  - name: tls-origination
+    trafficPolicy:
+      loadBalancer:
+        simple: ROUND_ROBIN
+      portLevelSettings:
+      - port:
+          number: {{ $.Values.port }}
+        tls:
+          mode: SIMPLE
+  - name: {{ include "name" $ }}
+    trafficPolicy:
+      loadBalancer:
+        simple: ROUND_ROBIN
+      portLevelSettings:
+      - port:
+          number: {{ $.Values.port }}
+        tls:
+          mode: DISABLE
+{{ end }}
+---
+{{ end }}

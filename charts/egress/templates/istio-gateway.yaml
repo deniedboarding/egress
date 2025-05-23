@@ -13,11 +13,15 @@ spec:
       number: {{ .Values.port }}
       name: {{ .Values.protocol }}
       protocol: {{ .Values.protocol | upper }}
-{{ with .Values.hosts }}
-    hosts: {{ toYaml . | nindent 4 }}
-{{ end }}
-{{ if eq .Values.protocol "tls" }}
+    hosts: {{ toYaml .Values.hosts | nindent 4 }}
+{{ if and .Values.tlsOrigination (eq .Values.protocol "tls") }}
     tls:
       mode: PASSTHROUGH
+  - hosts: {{ toYaml .Values.hosts | nindent 4 }}
+    - edition.cnn.com
+    port:
+      name: http-port-for-tls-origination
+      number: 80
+      protocol: HTTP
 {{ end }}
 {{ end }}
