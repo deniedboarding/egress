@@ -40,7 +40,7 @@ spec:
     route:
     - destination:
         host: {{ . | quote }}
-        subset: {{ include "name" . }}
+        subset: {{ include "name" $ }}
         port:
           number: {{ $.Values.port }}
       weight: 100
