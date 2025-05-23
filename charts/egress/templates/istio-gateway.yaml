@@ -18,7 +18,6 @@ spec:
     tls:
       mode: PASSTHROUGH
   - hosts: {{ toYaml .Values.hosts | nindent 4 }}
-    - edition.cnn.com
     port:
       name: http-port-for-tls-origination
       number: 80
