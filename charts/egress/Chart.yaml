@@ -9,4 +9,4 @@ dependencies:
 - name: gateway
   version: 1.25.0
   repository: https://istio-release.storage.googleapis.com/charts
-  condition: gateway.sidecar
+  condition: sidecar
