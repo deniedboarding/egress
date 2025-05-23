@@ -13,14 +13,18 @@ spec:
       number: {{ .Values.port }}
       name: {{ .Values.protocol }}
       protocol: {{ .Values.protocol | upper }}
-    hosts: {{ toYaml .Values.hosts | nindent 4 }}
+{{ with .Values.hosts }}
+    hosts: {{ toYaml . | nindent 4 }}
+{{ end }}
 {{ if and .Values.tlsOrigination (eq .Values.protocol "tls") }}
     tls:
       mode: PASSTHROUGH
-  - hosts: {{ toYaml .Values.hosts | nindent 4 }}
-    port:
+  - port:
       name: http-port-for-tls-origination
       number: 80
       protocol: HTTP
+{{ with .Values.hosts }}
+    hosts: {{ toYaml . | nindent 4 }}
+{{ end }}
 {{ end }}
 {{ end }}
