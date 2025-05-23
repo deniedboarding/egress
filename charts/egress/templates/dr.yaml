@@ -3,6 +3,8 @@ apiVersion: networking.istio.io/v1
 kind: DestinationRule
 metadata:
   name: egressgateway-for-{{ include "name" . }}
+  labels:
+    {{- include "egress.labels" . | nindent 4}}
 spec:
   host: {{ .Values.gateway.name }}.istio-system.svc.cluster.local
   subsets:

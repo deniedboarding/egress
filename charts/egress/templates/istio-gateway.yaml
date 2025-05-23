@@ -3,6 +3,8 @@ apiVersion: networking.istio.io/v1
 kind: Gateway
 metadata:
   name: {{ .Values.gateway.name }}
+  labels:
+    {{- include "egress.labels" . | nindent 4}}
 spec:
   selector:
     istio: {{ .Values.gateway.name }}

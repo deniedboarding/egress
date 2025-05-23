@@ -3,6 +3,8 @@ apiVersion: networking.istio.io/v1
 kind: VirtualService
 metadata:
   name: direct-{{ include "name" . }}-through-egress-gateway
+  labels:
+    {{- include "egress.labels" . | nindent 4}}
 spec:
 {{ with .Values.hosts }}
   hosts: {{ toYaml . | nindent 2 }}
