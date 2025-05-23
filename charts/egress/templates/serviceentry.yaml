@@ -8,7 +8,7 @@ metadata:
 {{ if $.Values.ambient }}
     istio.io/use-waypoint: {{ $.Values.gateway.name }}
 {{ end }}
-    {{- include "egress.labels" . | nindent 4}}
+    {{- include "egress.labels" $ | nindent 4}}
 spec:
   hosts:
   - {{ . | quote }}
@@ -25,10 +25,11 @@ apiVersion: networking.istio.io/v1
 kind: ServiceEntry
 metadata:
   name: {{ include "name" . }}
-{{ if .Values.ambient }}
   labels:
+{{ if .Values.ambient }}
     istio.io/use-waypoint: {{ .Values.gateway.name }}
 {{ end }}
+    {{- include "egress.labels" . | nindent 4}}
 spec:
 {{ with .Values.hosts }}
   hosts: {{ toYaml . | nindent 2 }}
