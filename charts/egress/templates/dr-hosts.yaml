@@ -3,9 +3,9 @@
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: {{ trimPrefix "*." . }}
+  name: {{ trimPrefix "*." . | quote }}
 spec:
-  host: {{ . }}
+  host: {{ . | quote }}
   subsets:
   - name: tls-origination
     trafficPolicy:
