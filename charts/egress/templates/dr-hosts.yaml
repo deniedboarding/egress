@@ -25,6 +25,6 @@ spec:
           number: {{ $.Values.port }}
         tls:
           mode: DISABLE
-{{ end }}
 ---
+{{ end }}
 {{ end }}
