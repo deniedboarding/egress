@@ -40,7 +40,9 @@ spec:
     route:
     - destination:
         host: {{ . | quote }}
+{{ if and .Values.tlsOrigination (eq .Values.protocol "tls") }}
         subset: {{ include "name" $ }}
+{{ end }}
         port:
           number: {{ $.Values.port }}
       weight: 100
