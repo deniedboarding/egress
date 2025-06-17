@@ -7,6 +7,6 @@ name: egress
 version: 0.0.0
 dependencies:
 - name: gateway
-  version: 1.25.0
+  version: 1.26.1
   repository: https://istio-release.storage.googleapis.com/charts
   condition: sidecar
