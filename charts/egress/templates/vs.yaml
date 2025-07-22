@@ -36,6 +36,9 @@ spec:
 {{ if eq $.Values.protocol "tls" }}
       sniHosts:
       - {{ . | quote }}
+{{ else if eq $.Values.protocol "http" }}
+      authority:
+        exact: {{ . | quote }}
 {{ end }}
     route:
     - destination:
