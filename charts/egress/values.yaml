@@ -4,6 +4,10 @@ gateway:
     type: ClusterIP
   podDisruptionBudget:
     minAvailable: 1
+  resources:
+    requests:
+      cpu: 25m
+      memory: 75Mi
 accessLog: true
 port: 443
 serviceEntryPerHost: false
