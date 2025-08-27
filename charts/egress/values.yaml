@@ -18,3 +18,6 @@ ambient: false
 # https://istio.io/latest/docs/tasks/traffic-management/egress/egress-gateway-tls-origination/
 # Enable TLS origination if protocol is tls
 tlsOrigination: true
+image:
+  repository: 674851156463.dkr.ecr.eu-north-1.amazonaws.com/deniedboarding/egress
+  tag: 4.1.1
