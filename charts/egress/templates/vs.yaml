@@ -61,7 +61,7 @@ spec:
         host: {{ .Values.gateway.name }}.istio-system.svc.cluster.local
         subset: tls-origination
         port:
-          number: {{ .Values.port }}
+          number: 80
 {{ range .Values.hosts }}
   - match:
     - gateways:

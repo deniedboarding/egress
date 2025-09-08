@@ -20,11 +20,13 @@ spec:
     tls:
       mode: PASSTHROUGH
   - port:
-      name: http-port-for-tls-origination
+      name: https-port-for-tls-origination
       number: 80
-      protocol: HTTP
+      protocol: HTTPS
 {{ with .Values.hosts }}
     hosts: {{ toYaml . | nindent 4 }}
 {{ end }}
+    tls:
+      mode: ISTIO_MUTUAL
 {{ end }}
 {{ end }}

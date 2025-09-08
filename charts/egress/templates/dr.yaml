@@ -11,6 +11,14 @@ spec:
   - name: {{ include "name" . }}
 {{ if and .Values.tlsOrigination (eq .Values.protocol "tls") }}
   - name: tls-origination
+    trafficPolicy:
+      loadBalancer:
+        simple: ROUND_ROBIN
+      portLevelSettings:
+      - port:
+          number: 80
+        tls:
+          mode: ISTIO_MUTUAL
 {{ end }}
   trafficPolicy:
     outlierDetection:
