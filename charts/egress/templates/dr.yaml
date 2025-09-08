@@ -10,7 +10,8 @@ spec:
   subsets:
   - name: {{ include "name" . }}
 {{ if and .Values.tlsOrigination (eq .Values.protocol "tls") }}
-  - name: tls-origination
+{{ range .Values.hosts }}
+  - name: {{ . | replace "." "-"  }}-tls-origination
     trafficPolicy:
       loadBalancer:
         simple: ROUND_ROBIN
@@ -19,6 +20,8 @@ spec:
           number: 80
         tls:
           mode: ISTIO_MUTUAL
+          sni: {{ . }}
+{{ end }}
 {{ end }}
   trafficPolicy:
     outlierDetection:

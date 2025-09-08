@@ -18,9 +18,7 @@ spec:
       - mesh
       port: {{ .Values.port }}
 {{ if eq .Values.protocol "tls" }}
-{{ with .Values.hosts }}
-      sniHosts: {{ toYaml . | nindent 6 }}
-{{ end }}
+      sniHosts: "*"
 {{ end }}
     route:
     - destination:
@@ -52,17 +50,17 @@ spec:
 {{ end }}
 {{ if and .Values.tlsOrigination (eq .Values.protocol "tls") }}
   http:
+{{ range .Values.hosts }}
   - match:
     - gateways:
       - mesh
       port: 80
     route:
     - destination:
-        host: {{ .Values.gateway.name }}.istio-system.svc.cluster.local
-        subset: tls-origination
+        host: {{ $.Values.gateway.name }}.istio-system.svc.cluster.local
+        subset: {{ . | replace "." "-"  }}-tls-origination
         port:
           number: 80
-{{ range .Values.hosts }}
   - match:
     - gateways:
       - {{ $.Values.gateway.name }}
