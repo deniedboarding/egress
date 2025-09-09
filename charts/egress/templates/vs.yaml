@@ -68,6 +68,8 @@ spec:
     - gateways:
       - {{ $.Values.gateway.name }}
       port: 80
+      authority:
+        exact: {{ . | quote }}
     route:
     - destination:
         host: {{ . | quote }}
