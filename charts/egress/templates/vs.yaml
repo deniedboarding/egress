@@ -59,7 +59,7 @@ spec:
     route:
     - destination:
         host: {{ $.Values.gateway.name }}.istio-system.svc.cluster.local
-        subset: {{ . | replace "." "-" | replace "*" ""  }}-tls-origination
+        subset: {{ . | trimPrefix "*." | replace "." "-" }}-tls-origination
         port:
           number: 80
   - match:
