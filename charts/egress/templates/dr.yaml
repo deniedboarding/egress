@@ -20,7 +20,7 @@ spec:
           number: 80
         tls:
           mode: ISTIO_MUTUAL
-          sni: {{ . }}
+          sni: {{ . | quote }}
 {{ end }}
 {{ end }}
   trafficPolicy:
