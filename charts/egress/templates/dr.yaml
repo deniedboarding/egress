@@ -11,7 +11,7 @@ spec:
   - name: {{ include "name" . }}
 {{ if and .Values.tlsOrigination (eq .Values.protocol "tls") }}
 {{ range .Values.hosts }}
-  - name: {{ . | replace "." "-"  }}-tls-origination
+  - name: {{ . | replace "." "-" | replace "*" "" }}-tls-origination
     trafficPolicy:
       loadBalancer:
         simple: ROUND_ROBIN
