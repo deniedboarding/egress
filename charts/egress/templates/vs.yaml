@@ -51,17 +51,19 @@ spec:
 {{ end }}
 {{ if and .Values.tlsOrigination (eq .Values.protocol "tls") }}
   http:
+{{ range .Values.hosts }}
   - match:
     - gateways:
       - mesh
       port: 80
+      authority:
+        exact: {{ . | quote }}
     route:
     - destination:
         host: {{ $.Values.gateway.name }}.istio-system.svc.cluster.local
-        subset: tls-origination
+        subset: {{ . | replace "." "-"  }}-tls-origination
         port:
           number: 80
-{{ range .Values.hosts }}
   - match:
     - gateways:
       - {{ $.Values.gateway.name }}
