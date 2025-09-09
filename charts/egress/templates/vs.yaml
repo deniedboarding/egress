@@ -36,8 +36,7 @@ spec:
       sniHosts:
       - {{ . | quote }}
 {{ else if eq $.Values.protocol "http" }}
-      authority:
-        exact: {{ . | quote }}
+      authority: {{- include "egress.string-match" . | nindent 8 }}
 {{ end }}
     route:
     - destination:
@@ -56,8 +55,7 @@ spec:
     - gateways:
       - mesh
       port: 80
-      authority:
-        exact: {{ . | quote }}
+      authority: {{- include "egress.string-match" . | nindent 8 }}
     route:
     - destination:
         host: {{ $.Values.gateway.name }}.istio-system.svc.cluster.local
@@ -68,8 +66,7 @@ spec:
     - gateways:
       - {{ $.Values.gateway.name }}
       port: 80
-      authority:
-        exact: {{ . | quote }}
+      authority: {{- include "egress.string-match" . | nindent 8 }}
     route:
     - destination:
         host: {{ . | quote }}

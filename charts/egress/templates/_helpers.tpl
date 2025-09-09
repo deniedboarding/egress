@@ -47,3 +47,11 @@ spec:
   resolution: {{ .Values.resolution }}
   location: MESH_EXTERNAL
 {{- end -}}
+
+{{- define "egress.string-match" }}
+{{ if hasPrefix "*" . }}
+regex: {{ . | replace "." "\\." | replace "*" ".*" | quote }}
+{{- else -}}
+exact: {{ . | quote }}
+{{- end -}}
+{{- end -}}
