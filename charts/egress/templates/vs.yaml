@@ -56,6 +56,8 @@ spec:
     - gateways:
       - mesh
       port: 80
+      authority:
+        exact: {{ . | quote }}
     route:
     - destination:
         host: {{ $.Values.gateway.name }}.istio-system.svc.cluster.local
