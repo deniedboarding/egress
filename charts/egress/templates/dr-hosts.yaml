@@ -8,18 +8,14 @@ spec:
   host: {{ . | quote }}
   subsets:
   - name: tls-origination
-    trafficPolicy:
-      loadBalancer:
-        simple: ROUND_ROBIN
+    trafficPolicy: {{ $.Values.trafficPolicy | nindent 6 }}
       portLevelSettings:
       - port:
           number: {{ $.Values.port }}
         tls:
           mode: SIMPLE
   - name: {{ include "name" $ }}
-    trafficPolicy:
-      loadBalancer:
-        simple: ROUND_ROBIN
+    trafficPolicy: {{ $.Values.trafficPolicy | nindent 6 }}
       portLevelSettings:
       - port:
           number: {{ $.Values.port }}
