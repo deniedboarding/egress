@@ -21,3 +21,6 @@ tlsOrigination: true
 trafficPolicy:
   loadBalancer:
     simple: ROUND_ROBIN
+image:
+  repository: 674851156463.dkr.ecr.eu-north-1.amazonaws.com/deniedboarding/egress
+  tag: 4.3.0
