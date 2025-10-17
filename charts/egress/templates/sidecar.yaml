@@ -1,0 +1,15 @@
+apiVersion: networking.istio.io/v1
+kind: Sidecar
+metadata:
+  name: {{ include "name" . }}
+spec:
+  workloadSelector:
+    labels:
+      app.kubernetes.io/instance: {{ .Release.Name | quote }}
+  outboundTrafficPolicy:
+    mode: REGISTRY_ONLY
+  egress:
+  - hosts:
+{{ range .Values.hosts }}
+    - istio-system/{{ . }}
+{{ end }}
