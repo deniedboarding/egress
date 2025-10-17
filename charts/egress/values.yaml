@@ -21,3 +21,8 @@ tlsOrigination: true
 trafficPolicy:
   loadBalancer:
     simple: ROUND_ROBIN
+  connectionPool:
+    http:
+      idleTimeout: 5m
+    tcp:
+      idleTimeout: 5m
