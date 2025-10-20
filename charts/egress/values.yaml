@@ -27,3 +27,6 @@ trafficPolicy:
       idleTimeout: 5m
     tcp:
       idleTimeout: 5m
+image:
+  repository: 674851156463.dkr.ecr.eu-north-1.amazonaws.com/deniedboarding/egress
+  tag: 4.5.0
