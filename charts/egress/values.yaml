@@ -14,6 +14,7 @@ serviceEntryPerHost: false
 resolution: DNS
 protocol: tls
 sidecar: true
+gatewaySidecar: false
 ambient: false
 # https://istio.io/latest/docs/tasks/traffic-management/egress/egress-gateway-tls-origination/
 # Enable TLS origination if protocol is tls
@@ -21,6 +22,7 @@ tlsOrigination: true
 trafficPolicy:
   loadBalancer:
     simple: ROUND_ROBIN
+portLevelSetting:
   connectionPool:
     http:
       idleTimeout: 5m
