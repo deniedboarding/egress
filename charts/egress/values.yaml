@@ -22,7 +22,6 @@ tlsOrigination: true
 trafficPolicy:
   loadBalancer:
     simple: ROUND_ROBIN
-portLevelSetting:
   connectionPool:
     http:
       idleTimeout: 5m

@@ -8,21 +8,21 @@ spec:
   host: {{ . | quote }}
   subsets:
   - name: tls-origination
-    trafficPolicy: {{ toYaml $.Values.trafficPolicy | nindent 6 }}
+    trafficPolicy:
       portLevelSettings:
       - port:
           number: {{ $.Values.port }}
         tls:
           mode: SIMPLE
-{{ toYaml $.Values.portLevelSetting | nindent 8 }}
+{{ toYaml $.Values.trafficPolicy | nindent 8 }}
   - name: {{ include "name" $ }}
-    trafficPolicy: {{ toYaml $.Values.trafficPolicy | nindent 6 }}
+    trafficPolicy:
       portLevelSettings:
       - port:
           number: {{ $.Values.port }}
         tls:
           mode: DISABLE
-{{ toYaml $.Values.portLevelSetting | nindent 8 }}
+{{ toYaml $.Values.trafficPolicy | nindent 8 }}
 ---
 {{ end }}
 {{ end }}
